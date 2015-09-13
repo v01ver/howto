@@ -1,15 +1,15 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <beans xmlns="http://www.springframework.org/schema/beans"
-       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-       xmlns:camel="http://camel.apache.org/schema/spring"
-       xmlns:context="http://www.springframework.org/schema/context"
-       xmlns:lang="http://www.springframework.org/schema/lang"
-       xsi:schemaLocation="
-       http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
-       http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context.xsd
-       http://camel.apache.org/schema/spring http://camel.apache.org/schema/spring/camel-spring.xsd
-       http://www.springframework.org/schema/lang http://www.springframework.org/schema/lang/spring-lang.xsd">
+xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+xmlns:camel="http://camel.apache.org/schema/spring"
+xmlns:context="http://www.springframework.org/schema/context"
+xmlns:lang="http://www.springframework.org/schema/lang"
+xsi:schemaLocation="
+http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
+http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context.xsd
+http://camel.apache.org/schema/spring http://camel.apache.org/schema/spring/camel-spring.xsd
+http://www.springframework.org/schema/lang http://www.springframework.org/schema/lang/spring-lang.xsd">
 
 	<context:property-placeholder location="${camelProperties}" />    
 
@@ -21,24 +21,21 @@
 
 	<lang:groovy id="processorbean" script-source="classpath:processor.groovy"/>
 
-
 	<camelContext id="v01ver-howto-camel-groovy-context" trace="false" xmlns="http://camel.apache.org/schema/spring">
 		<propertyPlaceholder id="myproperties"
-                             location="${camelProperties}" />
+		 location="${camelProperties}" />
 
-        <onException useOriginalMessage="true">
-            <exception>java.lang.Throwable</exception>
-            <handled>
-                <constant>true</constant>
-            </handled>
+		<onException useOriginalMessage="true">
+			<exception>java.lang.Throwable</exception>
+			<handled>
+				<constant>true</constant>
+			</handled>
 			<setBody>
 				<simple>${exception.message}</simple>
 			</setBody>
- 			<convertBodyTo type="java.lang.String" charset="UTF-8"/>
-           <to uri="${fileErrRoot}"/>
-        </onException>        
-							 
-							 
+			<convertBodyTo type="java.lang.String" charset="UTF-8"/>
+			<to uri="${fileErrRoot}"/>
+		</onException>        
 		<route id="groovy-route" autoStartup="true">
 			<from uri="{{fileInUri}}" />
 			<unmarshal ref="jsonmap"/>
@@ -48,11 +45,5 @@
 			<convertBodyTo type="java.lang.String" charset="UTF-8"/>
 			<to uri="{{fileOutUri}}" />
 		</route>
-
-
 	</camelContext>
-
-
-
-
 </beans>
