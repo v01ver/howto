@@ -1,0 +1,110 @@
+<project xmlns="http://maven.apache.org/POM/4.0.0" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+	<modelVersion>4.0.0</modelVersion>
+
+	<artifactId>howtp-camel-groovy</artifactId>
+	<groupId>fi.aapala.v01ver.howto.camel</groupId>
+	<version>1.0.1-SNAPSHOT</version>
+	<packaging>jar</packaging>
+	<name>v01ver :: howto :: camel :: groovy</name>
+	<description>How-to: Simple Camel Groovy Examples.</description>
+	<inceptionYear>2015</inceptionYear>
+	<url>https://github.com/v01ver/howto</url>
+
+	<developers>
+		<developer>
+			<id>v01ver</id>
+			<name>Esa Ääpälä</name>
+			<email>aapala@gmail.com</email>
+		</developer>
+	</developers>
+
+	<properties>        
+		<camel.version>2.15.2</camel.version>
+		<fileRoot>file://target</fileRoot>
+		<fileInRoot>${fileRoot}/classes/data</fileInRoot>
+		<fileOutRoot>${fileRoot}/out</fileOutRoot>
+		<fileErrRoot>${fileRoot}/error</fileErrRoot>
+		<camelProperties>classpath:META-INF/etc/camel.properties</camelProperties>
+	</properties>
+
+
+	<dependencies>
+		<dependency>
+			<groupId>org.apache.camel</groupId>
+			<artifactId>camel-core</artifactId>
+			<version>${camel.version}</version>
+		</dependency>
+		<dependency>
+			<groupId>org.apache.camel</groupId>
+			<artifactId>camel-script</artifactId>
+			<version>${camel.version}</version>
+		</dependency>
+		<dependency>
+			<groupId>org.apache.camel</groupId>
+			<artifactId>camel-freemarker</artifactId>
+			<version>${camel.version}</version>
+		</dependency>
+		<dependency>
+			<groupId>org.apache.camel</groupId>
+			<artifactId>camel-gson</artifactId>
+			<version>${camel.version}</version>
+		</dependency>
+		<dependency>
+			<groupId>org.apache.camel</groupId>
+			<artifactId>camel-groovy</artifactId>
+			<version>${camel.version}</version>
+		</dependency>	
+		<dependency>
+			<groupId>org.apache.camel</groupId>
+			<artifactId>camel-spring</artifactId>
+			<version>${camel.version}</version>
+		</dependency>	
+		<dependency>
+			<groupId>junit</groupId>
+			<artifactId>junit</artifactId>
+			<version>4.10</version>
+			<scope>test</scope>
+		</dependency>
+	</dependencies>
+
+	<build>
+		<plugins>
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-resources-plugin</artifactId>
+				<version>2.7</version>
+				<executions>
+					<execution>
+						<id>filtering-generate-resources</id>
+						<phase>generate-resources</phase>
+						<goals>
+							<goal>copy-resources</goal>
+						</goals>
+						<configuration>
+							<outputDirectory>${project.build.outputDirectory}</outputDirectory>
+							<resources>
+								<resource>
+									<directory>${project.basedir}/src/main/resources</directory>
+									<filtering>true</filtering>
+									<includes>
+										<include>**/*.xml</include>
+										<include>**/*.properties</include>
+									</includes>				
+								</resource>
+							</resources>
+						</configuration>
+					</execution>
+				</executions>
+			</plugin>            
+			<plugin>
+				<groupId>org.apache.camel</groupId>
+				<artifactId>camel-maven-plugin</artifactId>
+				<version>${camel.version}</version>
+				<dependencies>
+				</dependencies>
+			</plugin>
+
+		</plugins>
+	</build>
+
+</project>
