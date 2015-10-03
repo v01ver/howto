@@ -1,0 +1,105 @@
+ <!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Directive List Watch</title>
+
+<script type="text/javascript" src="lib/ng/angular.js">
+</script>
+<script type="text/javascript" src="lib/ng/angular-messages.min.js">
+</script>
+
+
+
+<script type="text/javascript" src="lib/v01/main.js">
+</script>
+
+<link rel="stylesheet" type="text/css"
+	href="lib/bts/css/bootstrap.min.css" />
+	
+<link rel="stylesheet" type="text/css"
+	href="lib/awe/css/font-awesome.min.css" />
+	
+<link rel="stylesheet" type="text/css"
+	href="lib/v01/main.css" />
+	
+
+
+</head>
+<body ng-app="v01app" class="container">
+<span ng-controller="listCtrl">
+<h2 ng-click="showhowto.directivelist=!showhowto.directivelist" class="v01click"><i class="fa" ng-class="(showhowto.directivelist)?'fa-caret-down':'fa-caret-right'" ></i> Directive List Watch</h2>
+<div class="col-md-12" ng-show="showhowto.directivelist">
+	<div class="panel panel-default">
+	<div class="panel-heading"><h3>List definitions, values and results in different data models</h3></div>
+	<div class="panel-body"  >
+	<div class="col-md-12" ng-repeat="l in list" >
+		<input type="number"
+			class="col-md-4"
+			placeholder="Clause: {{l.func}}" 
+			ng-model="values[l.name]"
+			ng-trim="true"
+			clauseresolver
+			clausename="{{l.name}}"
+			clause="{{l.func}}"
+			watch="values['{{l.name}}']"
+			clauseresult="result"
+		/>
+		<label class="col-md-4">Result {{result[l.name]}}</label>
+	</div>
+	</div>
+	</div>
+	<div class="panel panel-default">
+	<div class="panel-heading"><h3>List definitions, values and results in the same data model</h3></div>
+	<div class="panel-body">
+	<div class="col-md-12" ng-repeat="l in data" >
+		<input type="number"
+			class="col-md-4"
+			placeholder="Clause: {{l.func}}" 
+			ng-model="l.value"
+			ng-trim="true"
+			clauseresolverbyindex
+			watch="data[{{$index}}]"
+			clausex ="value"
+			clause="func"
+			clauseresult="result"
+		/>
+		<label class="col-md-4">Result {{l.result}}</label>
+	</div>
+	</div>
+	</div>
+	
+</div>
+</span>
+
+<span ng-controller="customvalidctrl">
+<h2 ng-click="showhowto.customvalid=!showhowto.customvalid" class="v01click"><i class="fa" ng-class="(showhowto.customvalid)?'fa-caret-down':'fa-caret-right'" ></i> Custom Validation</h2>
+<div class="col-md-12" ng-show="showhowto.customvalid">
+	<div class="panel panel-default">
+	<div class="panel-heading"><h3>RegEx Validation</h3></div>
+	<div class="panel-body" >
+	<form name="v01regexvalidform">
+	<div  class="col-md-12" ng-repeat="l in list" >
+		<input name="messages" type="text"
+			class="col-md-4"
+			placeholder="RegEx {{l.regex}}" 
+			ng-model="l.value"
+			ng-trim="true"
+			v01regex
+			regex="{{l.regex}}"
+			regexname="{{l.name}}"
+		/>
+		<span ng-messages="v01regexvalidform.$error" >
+			<label ng-message-exp="l.name">Not valid : {{l.regex}}</label>
+		</span>
+	</div>
+	</form>
+
+	</div>
+	</div>
+</div>
+</span>
+
+</body>
+
+</html> 

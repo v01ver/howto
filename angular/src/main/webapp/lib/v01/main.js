@@ -1,6 +1,9 @@
 
-var v01app = angular.module('v01app',  [])
+var v01app = angular.module('v01app',  ['ngMessages'])
 .run(function($rootScope) {
+	$rootScope.showhowto={};
+	$rootScope.showhowto.customvalid=true;
+	
 
 });
 
@@ -20,8 +23,10 @@ var v01list = v01app.controller('listCtrl', function ($scope, $http, $rootScope,
 	{name:'power.medium', func:'Math.pow(x, 1.234)', value: '',  result:''},
 	{name:'power.large', func:'Math.pow(x, 12.34)', value: '',  result:''}
 	];
+	
 
 });
+
 
 
 var clauseresolver = v01app. directive('clauseresolver', function () {
@@ -45,7 +50,7 @@ var clauseresolver = v01app. directive('clauseresolver', function () {
     };
 });
 
-var clauseresolverbyindex = v01app. directive('clauseresolverbyindex', function () {
+var clauseresolverbyindex = v01app.directive('clauseresolverbyindex', function () {
     return {
         restrict: 'E, A, C',
         link: function (scope, element, attrs) {
@@ -64,3 +69,27 @@ var clauseresolverbyindex = v01app. directive('clauseresolverbyindex', function 
     };
 });
 
+var v01customvalidCtrl = v01app.controller('customvalidctrl', function ($scope, $http, $rootScope, $compile, $element,$filter ) {
+	$scope.list=[ 
+	{name:'text1', regex:'.*'},
+	{name:'text2', regex:'[a-zA-Z]*'},
+	{name:'text3', regex:'\\d*'}
+	];;
+});
+
+
+v01customvalidator = v01app.directive('v01regex', function () {
+    return {
+        restrict: 'A',
+        require: 'ngModel',
+        link: function (scope, element, attrs, ctrl) {
+            function regexValidator(ngModelValue) {
+				var rex = new RegExp( '^' + attrs.regex + '$');
+				var v = rex.test(ngModelValue);
+				ctrl.$setValidity(attrs.regexname, v);
+                return ngModelValue;
+            }
+            ctrl.$parsers.push(regexValidator);
+        }
+    };
+});
