@@ -3,7 +3,10 @@
 Simple AngularJS examples:
 
  *  Directive List Watch: watch scope model with given directive attributes.  
+ *  Custom validation
 
+Demo: http://aapala.fi/howto/ng/ 
+ 
 Blog: http://v01ver-howto.blogspot.fi/
 
 Ref: 

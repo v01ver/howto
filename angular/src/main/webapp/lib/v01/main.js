@@ -2,9 +2,6 @@
 var v01app = angular.module('v01app',  ['ngMessages'])
 .run(function($rootScope) {
 	$rootScope.showhowto={};
-	$rootScope.showhowto.customvalid=true;
-	
-
 });
 
 
