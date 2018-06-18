@@ -1,4 +1,6 @@
-# Progress ja DB kyselyt
+# Progress Parhaat Käytännös
+
+## Progress ja DB kyselyt
 
   * Miten Progress 11.7.x suosittelee tietokantakyselyitä tehtävän
   * Miten db kyselyitä voidaan optimoida
@@ -7,13 +9,13 @@
   * Suorituskyvyn mittaaminen, ennen optimointia ja optimoinnin jälkeen
 
  
-# REST API ja Progress 11.7.x versio
+## REST API ja Progress 11.7.x versio
 
   * Miten REST rajapintaa tulisi käyttää
   * REST parhaat käytännöt
   * Tähän liittyen joku esimerkki työ
 
-# Kendo käyttöliittymä ja Progress 11.7.x
+## Kendo käyttöliittymä ja Progress 11.7.x
 
   * Miten Kendoa tulisi käyttää Progress 11.7 kanssa
   * Parhaat käytännöt
@@ -22,7 +24,7 @@
   * Esimerkkityö, jossa olisi iso/pitkä sivu, joka sivutetaan osioihin ”Fiksusti” eli ei yhtä pitkää listaa / sivua vaan siinä olisi käytettävyyden kannalta järkevä sivutus/rytmitys.
 
 
-Lähteet:
+## Lähteet:
 
 https://www.progress.com/openedge/classroom-edition
 
