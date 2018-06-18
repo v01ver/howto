@@ -1,4 +1,4 @@
-# Progress Parhaat Käytännös
+# Progress Parhaat Käytännöt
 
 ## Progress ja DB kyselyt
 
